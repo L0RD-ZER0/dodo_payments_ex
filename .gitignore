@@ -1,0 +1,15 @@
+/_build/
+/cover/
+/deps/
+/doc/
+/tmp/
+/priv/plts/
+/*.tar
+/*.tar.gz
+/erl_crash.dump
+.env
+/.agents/
+/.claude/
+/.codex/
+/.elixir_ls/
+/.ori/

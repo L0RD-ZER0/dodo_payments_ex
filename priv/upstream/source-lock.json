@@ -1,0 +1,13 @@
+{
+  "source": "npm:dodopayments",
+  "version": "2.47.0",
+  "tarball_sha256": "030a4fc116f289199dd925572707d5d7407a21d666856d398aa8b1eb5a3c07e8",
+  "official_http_operations": 137,
+  "schema_first_operations": [
+    "GET /discounts/{discount_id}/customers",
+    "POST /discounts/{discount_id}/customers",
+    "DELETE /discounts/{discount_id}/customers/{customer_id}"
+  ],
+  "sdk_core_operation_total": 140,
+  "audited_on": "2026-08-18"
+}

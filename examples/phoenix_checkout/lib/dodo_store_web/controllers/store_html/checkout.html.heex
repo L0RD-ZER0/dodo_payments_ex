@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Secure checkout</title>
+    <link rel="stylesheet" href={~p"/assets/app.css"} />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/dodopayments-checkout@1.9.8/dist/index.js"
+      integrity="sha384-H3xQrq3FWZky4TIOdapnx0RrlbUu42WVDeKVnFI5ESWP3rEijoYHP7YyK5hklN3b"
+      crossorigin="anonymous"
+    >
+    </script>
+    <script defer src={~p"/assets/app.js"}>
+    </script>
+  </head>
+  <body
+    data-checkout-url={@checkout.checkout_url}
+    data-dodo-mode={@dodo_mode}
+    data-auto-open="true"
+  >
+    <main class="shell checkout-state">
+      <p class="eyebrow">Secure Dodo Payments checkout</p>
+      <h1>Your checkout is ready</h1>
+      <p id="checkout-status" role="status">Opening the payment overlay…</p>
+      <button id="open-checkout" type="button">Open checkout again</button>
+      <a class="secondary-link" href={@checkout.checkout_url}>Continue in a full page</a>
+      <a class="secondary-link" href={~p"/"}>Back to product</a>
+    </main>
+  </body>
+</html>

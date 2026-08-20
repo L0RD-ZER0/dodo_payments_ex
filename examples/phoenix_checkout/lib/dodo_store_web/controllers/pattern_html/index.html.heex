@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dodo billing patterns</title>
+    <link rel="stylesheet" href={~p"/assets/app.css"} />
+  </head>
+  <body>
+    <main class="shell pattern-shell">
+      <a class="secondary-link" href={~p"/"}>← One-time checkout</a>
+      <p class="eyebrow">Runnable Phoenix field guide</p>
+      <h1>Ten billing patterns, one reliability model.</h1>
+      <p class="description pattern-intro">
+        Each card is a small vertical slice. Demo actions write only to the local SQLite
+        inbox, outbox, projections, or usage buckets; Dodo calls remain explicit and
+        dispatchable through the SDK.
+      </p>
+
+      <section class="pattern-grid">
+        <a :for={pattern <- @patterns} class="pattern-card" href={~p"/patterns/#{pattern.slug}"}>
+          <span class="pattern-number">{pattern.id}</span>
+          <div>
+            <h2>{pattern.title}</h2>
+            <p>{pattern.use_case}</p>
+          </div>
+        </a>
+      </section>
+
+      <section class="state-strip">
+        <div><strong>{length(@records)}</strong><span>local projections</span></div>
+        <div><strong>{length(@commands)}</strong><span>pending commands</span></div>
+        <div><strong>{length(@buckets)}</strong><span>usage buckets</span></div>
+      </section>
+    </main>
+  </body>
+</html>

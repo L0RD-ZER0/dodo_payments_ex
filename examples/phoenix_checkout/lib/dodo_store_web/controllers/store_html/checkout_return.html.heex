@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkout returned</title>
+    <link rel="stylesheet" href={~p"/assets/app.css"} />
+  </head>
+  <body>
+    <main class="shell checkout-state">
+      <p class="eyebrow">Returned from checkout</p>
+      <h1>{Map.get(@result, "status", "Payment processing")}</h1>
+      <p :if={Map.get(@result, "payment_id")}>
+        Payment reference: <code>{Map.get(@result, "payment_id")}</code>
+      </p>
+      <p class="notice">
+        This page is informational. Fulfill purchases only after verifying a Dodo webhook or retrieving the payment server-side.
+      </p>
+      <a class="secondary-link" href={~p"/"}>Return to the product</a>
+    </main>
+  </body>
+</html>

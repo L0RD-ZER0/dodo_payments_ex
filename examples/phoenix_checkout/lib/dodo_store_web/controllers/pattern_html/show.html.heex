@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{@pattern.title} · Dodo billing patterns</title>
+    <link rel="stylesheet" href={~p"/assets/app.css"} />
+  </head>
+  <body>
+    <main class="shell pattern-shell">
+      <a class="secondary-link" href={~p"/patterns"}>← All patterns</a>
+      <p class="eyebrow">Pattern {@pattern.id} of 10</p>
+      <h1>{@pattern.title}</h1>
+      <p class="description pattern-intro">{@pattern.use_case}</p>
+
+      <section class="pattern-detail">
+        <div>
+          <p class="kicker">SDK boundary</p>
+          <code>{@pattern.sdk}</code>
+        </div>
+        <div>
+          <p class="kicker">Correctness invariant</p>
+          <p>{@pattern.invariant}</p>
+        </div>
+        <div>
+          <p class="kicker">Durable state</p>
+          <p>{@pattern.storage}</p>
+        </div>
+      </section>
+
+      <%= if Phoenix.Flash.get(@flash, :info) do %>
+        <p class="notice">{Phoenix.Flash.get(@flash, :info)}</p>
+      <% end %>
+      <%= if Phoenix.Flash.get(@flash, :error) do %>
+        <p class="error">{Phoenix.Flash.get(@flash, :error)}</p>
+      <% end %>
+
+      <form action={~p"/patterns/#{@pattern.slug}/demo"} method="post">
+        <input type="hidden" name="_csrf_token" value={Plug.CSRFProtection.get_csrf_token()} />
+        <button type="submit">Run safe local demo</button>
+      </form>
+
+      <section :if={@pattern.id in [2, 3, 5, 6, 9]} class="pattern-detail">
+        <h2>Start a real test-mode checkout</h2>
+        <p>
+          Create the relevant products in the Dodo dashboard, then paste their IDs here.
+          The application persists the exact expected order before contacting Dodo.
+        </p>
+        <form action={~p"/patterns/#{@pattern.slug}/checkout"} method="post">
+          <input type="hidden" name="_csrf_token" value={Plug.CSRFProtection.get_csrf_token()} />
+          <label>
+            Product IDs (comma-separated)
+            <input name="product_ids" required placeholder="pdt_base,pdt_addon" />
+          </label>
+          <label :if={@pattern.id in [2, 5, 6, 9]}>
+            Your application account ID
+            <input name="account_id" required placeholder="account_123" />
+          </label>
+          <label :if={@pattern.id in [5, 9]}>
+            Credits granted per purchase or period
+            <input name="credits" required type="number" min="1" value="1000" />
+          </label>
+          <button type="submit">Create expected order and checkout</button>
+        </form>
+      </section>
+
+      <section class="state-grid">
+        <article>
+          <h2>Pattern records</h2>
+          <p :if={@records == []}>No projection yet.</p>
+          <pre :for={record <- @records}>{Jason.encode!(%{key: record.business_key, status: record.status, data: record.data}, pretty: true)}</pre>
+        </article>
+        <article>
+          <h2>Shared lab reliability state</h2>
+          <p>{length(@commands)} pending command(s) across all patterns.</p>
+          <p>{length(@buckets)} atomic usage bucket(s) across the lab.</p>
+          <pre :for={command <- @commands}>{command.kind} · {command.command_id}</pre>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

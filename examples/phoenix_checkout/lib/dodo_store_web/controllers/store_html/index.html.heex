@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={Plug.CSRFProtection.get_csrf_token()} />
+    <title>Phoenix Field Guide</title>
+    <link rel="stylesheet" href={~p"/assets/app.css"} />
+  </head>
+  <body>
+    <main class="shell">
+      <p><a class="secondary-link" href={~p"/patterns"}>Explore all 10 billing patterns →</a></p>
+      <p class="eyebrow">Dodo Payments · Phoenix example · {@dodo_mode} mode</p>
+      <section class="product-card">
+        <div class="book" aria-hidden="true">PHX</div>
+        <div class="product-copy">
+          <p class="kicker">One-time digital product</p>
+          <h1>{@product.name}</h1>
+          <p class="description">{@product.description}</p>
+          <ul class="features">
+            <li>Explicit Dodo client configuration</li>
+            <li>Server-created checkout sessions</li>
+            <li>Hosted overlay payment UI</li>
+          </ul>
+          <div class="purchase-row">
+            <strong>${price_in_dollars(@product)}</strong>
+            <form method="post" action={~p"/checkout"}>
+              <input
+                type="hidden"
+                name="_csrf_token"
+                value={Plug.CSRFProtection.get_csrf_token()}
+              />
+              <button type="submit" disabled={is_nil(@product_id)}>Open secure checkout</button>
+            </form>
+          </div>
+          <p :if={is_nil(@product_id)} class="notice" role="status">
+            Product not configured. Run <code>mix run scripts/create_product.exs</code> first.
+          </p>
+          <p :if={Phoenix.Flash.get(@flash, :error)} class="error" role="alert">
+            {Phoenix.Flash.get(@flash, :error)}
+          </p>
+        </div>
+      </section>
+      <p class="footnote">
+        Checkout is created on the Phoenix server; the API key never reaches the browser.
+      </p>
+    </main>
+  </body>
+</html>

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.1
+
+- Maintenance release with no library code or public API changes.
+- Refreshed the development lockfile: Req 0.7.4, Mint 1.10.1, ExDoc 0.40.4,
+  and Dialyxir 1.4.8. `mix.lock` is not shipped in the Hex package, so
+  dependency constraints for consumers are unchanged (`req ~> 0.7.3`,
+  `finch ~> 0.21`); run `mix deps.update req mint` in your application to pick
+  up the newer transport releases.
+- Refreshed the Phoenix checkout example's dependencies (Phoenix, Phoenix
+  LiveView, Bandit, and Req).
+
 ## 0.1.0
 
 - Raised the default transport baseline to Req 0.7.3 while retaining Elixir

@@ -18,7 +18,7 @@ a company to use Tesla or an internal HTTP stack without changing the public
 API. Named Finch pools, custom-client connections, and durable jobs remain
 application-owned.
 
-Version `0.1.0` is a safety-focused public v0. Its API may evolve across `0.x`
+This SDK is a safety-focused public v0. Its API may evolve across `0.x`
 releases, but payment-outcome and credential-handling behavior are treated as
 hard compatibility boundaries.
 

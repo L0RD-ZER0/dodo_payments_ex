@@ -26,7 +26,7 @@ defmodule DodoStore.MixProject do
       {:bandit, "~> 1.7"},
       {:dodo_payments, path: "../.."},
       {:ecto_sql, "~> 3.14"},
-      {:ecto_sqlite3, "~> 0.24.1"},
+      {:ecto_sqlite3, "~> 0.25.0"},
       {:jason, "~> 1.4"},
       {:phoenix, "~> 1.8"},
       {:phoenix_html, "~> 4.2"},
